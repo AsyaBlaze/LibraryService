@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+    <nav>
+        <a style="margin: 10px" href="http://localhost:8060/library/book">Catalog</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/info">All books info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/reviews_info">Book reviews info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=author">Authors statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=genre">Genre statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=purchase">Profit statistics</a>
+        <br/><br/><br/>
+    </nav>
+
+    <br> <br>
+    <form th:method="GET" th:object="${book}">
+        <b>Title: </b>
+        <span th:text="${book.getTitle()}"/>
+        <br/>
+        <b>Author: </b>
+        <span th:text="${book.getAuthor().getName()}"/>
+        <br/>
+        <b>Genre: </b>
+        <span th:text="${book.getGenre().getName()}"/>
+        <br/>
+        <b>Published date: </b>
+        <span th:text="${book.getPublishedDate()}"/>
+        <br/>
+        <b>ISBN: </b>
+        <span th:text="${book.getIsbn()}"/>
+        <br/>
+        <b>Price: </b>
+        <span th:text="${book.getPrice()}"/>
+    </form>
+    <br/>
+    <form th:action="@{'/library/book/' + ${book.id} + '/purchase'}" th:method="POST" th:object="${purchase}">
+        <label for="buyerName">Enter your name: </label>
+        <input type="text" th:field="*{buyerName}" id="buyerName"/>
+        <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('buyerName')}" th:errors="*{buyerName}">buyerName error</div>
+        <br/>
+        <button type="submit">Buy</button>
+    </form>
+    <br/>
+
+    <br>
+    <div>
+        <form th:method="GET" th:action="@{/library/book/{id}/edit (id=${book.getId()})}">
+            <input type="submit" value="Edit"/>
+        </form>
+    </div>
+
+    <div>
+        <form th:method="GET" th:action="@{/library/book/{id}/reviews (id=${book.getId()})}">
+            <input type="submit" value="Reviews"/>
+        </form>
+    </div>
+
+    <div class="divD">
+        <form th:method="DELETE" th:action="@{/library/book/{id}/delete (id=${book.getId()})}">
+            <input type="submit" value="Delete"/>
+        </form>
+    </div>
+
+</body>
+</html>

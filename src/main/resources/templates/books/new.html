@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create new book</title>
+</head>
+<body>
+  <nav>
+    <a style="margin: 10px" href="http://localhost:8060/library/book">Catalog</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/info">All books info</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/reviews_info">Book reviews info</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=author">Authors statistics</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=genre">Genre statistics</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=purchase">Profit statistics</a>
+    <br/><br/><br/>
+  </nav>
+
+  <form th:method="POST" th:action="@{/library/book/create}" th:object="${book}">
+    <label for="title">Enter title: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title error</div>
+    <br/>
+    <label for="price">Enter price: </label>
+    <input type="number" th:field="*{price}" id="price"/>
+    <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">price error</div>
+    <br/>
+    <label for="isbn">Enter ISBN: </label>
+    <input type="text" th:field="*{isbn}" id="isbn"/>
+    <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">isbn error</div>
+    <br/>
+    <label for="publishedDate">Enter published date: </label>
+    <input type="date" th:field="*{publishedDate}" id="publishedDate"/>
+    <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('publishedDate')}" th:errors="*{publishedDate}">publishedDate error</div>
+    <br/>
+    <label for="choseAuthor">Choose author: </label>
+    <select id="choseAuthor" th:field="*{author.id}">
+      <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
+    </select>
+
+    <h3>Or Add New Author</h3>
+    <div style="margin-left: 40px">
+      <label for="newAuthorName">Name: </label>
+      <input type="text" th:field="*{author.name}" id="newAuthorName"/>
+      <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('author.name')}" th:errors="*{author.name}">name error</div>
+      <br/>
+      <label for="newAuthorBirthday">Birthday: </label>
+      <input type="date" th:field="*{author.birthday}" id="newAuthorBirthday"/>
+      <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('author.birthday')}" th:errors="*{author.birthday}">birthday error</div>
+      <br/>
+      <label for="newAuthorCountry">Country: </label>
+      <input type="text" th:field="*{author.country}" id="newAuthorCountry"/>
+      <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('author.country')}" th:errors="*{author.country}">country error</div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <label for="choseGenre">Choose genre: </label>
+    <select id="choseGenre" th:field="*{genre.id}">
+      <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
+    </select>
+
+    <h3>Or Add New Genre</h3>
+    <div style="margin-left: 40px">
+      <label for="newGenreName">Name: </label>
+      <input type="text" th:field="*{genre.name}" id="newGenreName"/>
+      <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('genre.name')}" th:errors="*{genre.name}">name error</div>
+      <br/>
+      <label for="newGenreDescription">Description: </label>
+      <input type="text" th:field="*{genre.description}" id="newGenreDescription"/>
+      <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('genre.description')}" th:errors="*{genre.description}">description error</div>
+    </div>
+
+    <br/><br/>
+    <input type="submit" value="Create"/>
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/create-tables.yaml
+  - include:
+      file: db/changelog/insert-test-data.yaml
+  - include:
+      file: db/changelog/create-views.yaml
+  - include:
+      file: db/changelog/create-views-triggers.yaml

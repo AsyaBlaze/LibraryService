@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add new review</title>
+</head>
+<body>
+  <nav>
+    <a style="margin: 10px" href="http://localhost:8060/library/book">Catalog</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/info">All books info</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/reviews_info">Book reviews info</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=author">Authors statistics</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=genre">Genre statistics</a>
+    <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=purchase">Profit statistics</a>
+    <br/><br/><br/>
+  </nav>
+
+  <form th:method="POST" th:action="@{/library/book/{id}/add_review (id=${bookId})}" th:object="${review}">
+    <label for="reviewerName">Enter your name: </label>
+    <input type="text" th:field="*{reviewerName}" id="reviewerName"/>
+    <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('reviewerName')}" th:errors="*{reviewerName}">reviewer name error</div>
+    <br/>
+    <label for="rating">Enter rating from 0 to 10: </label>
+    <input type="number" th:field="*{rating}" id="rating"/>
+    <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">rating error</div>
+    <br/>
+    <label for="reviewText">Enter review: </label>
+    <input type="text" th:field="*{reviewText}" id="reviewText"/>
+    <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('reviewText')}" th:errors="*{reviewText}">reviewText error</div>
+    <br/><br/>
+    <input type="submit" value="Publish"/>
+  </form>
+
+</body>
+</html>

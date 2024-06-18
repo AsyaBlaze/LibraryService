@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit book info</title>
+</head>
+<body>
+    <nav>
+        <a style="margin: 10px" href="http://localhost:8060/library/book">Catalog</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/info">All books info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/reviews_info">Book reviews info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=author">Authors statistic</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=genre">Genre statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=purchase">Profit statistics</a>
+        <br/><br/><br/>
+    </nav>
+
+    <form th:method="PATCH" th:action="@{/library/book/{id}(id=${book.getId()})}" th:object="${book}">
+        <label for="title">Enter title: </label>
+        <input type="text" th:field="*{title}" id="title"/>
+        <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title error</div>
+        <br/>
+        <label for="isbn">Enter isbn: </label>
+        <input type="text" th:field="*{isbn}" id="isbn"/>
+        <div style="color:red" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">isbn error</div>
+        <br/>
+        <label for="price">Enter price: </label>
+        <input type="text" th:field="*{price}" id="price"/>
+        <div style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">price error</div>
+        <br/>
+        <label for="publishedDate">Enter published date: </label>
+        <input type="date" th:field="*{publishedDate}" id="publishedDate"/>
+        <div style="color:red; font-style: italic" th:if="${#fields.hasErrors('publishedDate')}" th:errors="*{publishedDate}">publishedDate error</div>
+        <br/>
+        <label for="selectAuthor">Author: </label>
+        <select id="selectAuthor" th:field="*{author}">
+            <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"/>
+        </select>
+        <br/>
+        <label for="selectGenre">Genre: </label>
+        <select id="selectGenre" th:field="*{genre}">
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"/>
+        </select>
+        <br/>
+        <input type="submit" value="Edit!"/>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Genres statistics</title>
+</head>
+<body>
+    <nav>
+        <a style="margin: 10px" href="http://localhost:8060/library/book">Catalog</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/info">All books info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/reviews_info">Book reviews info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=author">Authors statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=genre">Genre statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=purchase">Profit statistics</a>
+        <br/><br/><br/>
+    </nav>
+
+    <table style="width: 60%; margin: 30px; border-collapse: collapse">
+        <tr>
+            <th>Genre</th>
+            <th>Number of books</th>
+            <th>Average rating</th>
+        </tr>
+        <tr th:each="genre : ${statistic}">
+            <td th:text="${genre.name}"/>
+            <td th:text="${genre.book_count}"/>
+            <td th:text="${#numbers.formatDecimal(genre.average_rating, 1, 2)}"/>
+        </tr>
+    </table>
+</body>
+</html>

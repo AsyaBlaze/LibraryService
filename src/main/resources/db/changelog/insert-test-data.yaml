@@ -1,0 +1,256 @@
+databaseChangeLog:
+  # Предыдущие changeSet, описанные ранее...
+
+  - changeSet:
+      id: 10
+      author: anastasia
+      changes:
+        - insert:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  value: "1eaf2176-40b7-4a50-8b9f-f2d4c5a75e6e"
+              - column:
+                  name: name
+                  value: "Jane Austen"
+              - column:
+                  name: birthday
+                  value: "1775-12-16"
+              - column:
+                  name: country
+                  value: "UK"
+        - insert:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  value: "0f7c965e-5807-4898-8c2a-3b4af8b71524"
+              - column:
+                  name: name
+                  value: "Mark Twain"
+              - column:
+                  name: birthday
+                  value: "1835-11-30"
+              - column:
+                  name: country
+                  value: "USA"
+
+  - changeSet:
+      id: 11
+      author: anastasia
+      changes:
+        - insert:
+            tableName: genres
+            columns:
+              - column:
+                  name: id
+                  value: "d2dcef15-7d94-4a6f-9201-b8a235a5898c"
+              - column:
+                  name: name
+                  value: "Fiction"
+              - column:
+                  name: description
+                  value: "Fictional works of prose."
+        - insert:
+            tableName: genres
+            columns:
+              - column:
+                  name: id
+                  value: "db6a073e-cc85-4843-8e0c-6f94de94b083"
+              - column:
+                  name: name
+                  value: "Science Fiction"
+              - column:
+                  name: description
+                  value: "Works of science fiction."
+
+  - changeSet:
+      id: 12
+      author: anastasia
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  value: "9bfa3e38-986e-4f12-bc71-d00f8e17fdd0"
+              - column:
+                  name: title
+                  value: "Pride and Prejudice"
+              - column:
+                  name: author_id
+                  value: "1eaf2176-40b7-4a50-8b9f-f2d4c5a75e6e"
+              - column:
+                  name: genre_id
+                  value: "d2dcef15-7d94-4a6f-9201-b8a235a5898c"
+              - column:
+                  name: published_date
+                  value: "1813-01-28"
+              - column:
+                  name: isbn
+                  value: "978-3-16-148410-0"
+              - column:
+                  name: price
+                  value: 342
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  value: "a6b51676-f276-4b5a-9635-dbb82a9d8e4a"
+              - column:
+                  name: title
+                  value: "Adventures of Huckleberry Finn"
+              - column:
+                  name: author_id
+                  value: "0f7c965e-5807-4898-8c2a-3b4af8b71524"
+              - column:
+                  name: genre_id
+                  value: "d2dcef15-7d94-4a6f-9201-b8a235a5898c"
+              - column:
+                  name: published_date
+                  value: "1884-12-10"
+              - column:
+                  name: isbn
+                  value: "978-0-14-243717-9"
+              - column:
+                  name: price
+                  value: 821
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  value: "3e1971fa-53d4-4a95-bbdf-df7c89e41865"
+              - column:
+                  name: title
+                  value: "Emma"
+              - column:
+                  name: author_id
+                  value: "1eaf2176-40b7-4a50-8b9f-f2d4c5a75e6e"
+              - column:
+                  name: genre_id
+                  value: "d2dcef15-7d94-4a6f-9201-b8a235a5898c"
+              - column:
+                  name: published_date
+                  value: "1815-12-23"
+              - column:
+                  name: isbn
+                  value: "978-0-14-143958-7"
+              - column:
+                  name: price
+                  value: 921
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  value: "4c2aef31-91cf-45c4-b942-5d39380a3e78"
+              - column:
+                  name: title
+                  value: "The Mysterious Stranger"
+              - column:
+                  name: author_id
+                  value: "0f7c965e-5807-4898-8c2a-3b4af8b71524"
+              - column:
+                  name: genre_id
+                  value: "db6a073e-cc85-4843-8e0c-6f94de94b083"
+              - column:
+                  name: published_date
+                  value: "1916-01-01"
+              - column:
+                  name: isbn
+                  value: "978-0-486-27272-5"
+              - column:
+                  name: price
+                  value: 568
+
+  - changeSet:
+      id: 13
+      author: anastasia
+      changes:
+        - insert:
+            tableName: reviews
+            columns:
+              - column:
+                  name: id
+                  value: "3d791615-6b2c-4f70-83c8-7d3b0c8b09a3"
+              - column:
+                  name: book_id
+                  value: "9bfa3e38-986e-4f12-bc71-d00f8e17fdd0"
+              - column:
+                  name: reviewer_name
+                  value: "John Doe"
+              - column:
+                  name: rating
+                  value: 5
+              - column:
+                  name: review_text
+                  value: "A timeless classic."
+              - column:
+                  name: review_date
+                  value: "2022-01-01"
+        - insert:
+            tableName: reviews
+            columns:
+              - column:
+                  name: id
+                  value: "7a9713ad-8c4b-4a68-a9d3-31cf9855a3d2"
+              - column:
+                  name: book_id
+                  value: "a6b51676-f276-4b5a-9635-dbb82a9d8e4a"
+              - column:
+                  name: reviewer_name
+                  value: "Jane Smith"
+              - column:
+                  name: rating
+                  value: 4
+              - column:
+                  name: review_text
+                  value: "An adventurous read."
+              - column:
+                  name: review_date
+                  value: "2022-02-15"
+        - insert:
+            tableName: reviews
+            columns:
+              - column:
+                  name: id
+                  value: "2e7760f5-9d5e-4952-8785-ecc9c912fa9e"
+              - column:
+                  name: book_id
+                  value: "3e1971fa-53d4-4a95-bbdf-df7c89e41865"
+              - column:
+                  name: reviewer_name
+                  value: "Alice Johnson"
+              - column:
+                  name: rating
+                  value: 5
+              - column:
+                  name: review_text
+                  value: "A fascinating character study."
+              - column:
+                  name: review_date
+                  value: "2022-03-10"
+        - insert:
+            tableName: reviews
+            columns:
+              - column:
+                  name: id
+                  value: "9fba2e30-1db0-4a91-bbf1-77ad2a45a9d1"
+              - column:
+                  name: book_id
+                  value: "4c2aef31-91cf-45c4-b942-5d39380a3e78"
+              - column:
+                  name: reviewer_name
+                  value: "Bob Brown"
+              - column:
+                  name: rating
+                  value: 3
+              - column:
+                  name: review_text
+                  value: "Intriguing but dense."
+              - column:
+                  name: review_date
+                  value: "2022-04-20"

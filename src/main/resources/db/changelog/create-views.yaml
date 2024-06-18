@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 14
+      author: anastasia
+      changes:
+        - sql:
+            sql: |
+              CREATE MATERIALIZED VIEW author_statistic AS
+              SELECT
+                a.id,
+                a.name,
+                COUNT(b.id) AS book_count,
+                AVG(r.rating) AS average_rating
+              FROM
+                authors a
+              JOIN
+                books b ON a.id = b.author_id
+              JOIN
+                reviews r ON b.id = r.book_id
+              GROUP BY
+                a.id;
+
+  - changeSet:
+      id: 15
+      author: anastasia
+      changes:
+        - sql:
+            sql: |
+              CREATE MATERIALIZED VIEW genres_statistic AS
+              SELECT 
+                  g.id, 
+                  g.name, 
+                  COUNT(b.id) AS book_count, 
+                  AVG(r.rating) AS average_rating 
+              FROM 
+                  books b 
+              JOIN 
+                  genres g ON b.genre_id = g.id
+              JOIN 
+                  reviews r ON b.id = r.book_id 
+              GROUP BY 
+                  g.id, g,name;
+
+  - changeSet:
+      id: 16
+      author: anastasia
+      changes:
+        - sql:
+            sql: |
+              CREATE MATERIALIZED VIEW purchases_statistic AS
+              SELECT
+                  a.id,
+                  SUM(b.price) AS book_sum,
+                  a.name AS author_name
+              FROM
+                  purchases p
+              JOIN
+                  books b ON p.book_id = b.id
+              JOIN
+                  authors a ON b.author_id = a.id
+              GROUP BY
+                  a.id, a.name;

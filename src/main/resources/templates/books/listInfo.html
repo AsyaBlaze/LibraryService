@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books info</title>
+</head>
+<body>
+    <nav>
+        <a style="margin: 10px" href="http://localhost:8060/library/book">Catalog</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/info">All books info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/reviews_info">Book reviews info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=author">Authors statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=genre">Genre statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=purchase">Profit statistics</a>
+        <br/><br/><br/>
+    </nav>
+
+    <table style="width: 60%; margin: 30px; border-collapse: collapse">
+        <tr>
+            <th>Book title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Published date</th>
+        </tr>
+        <tr th:each="book : ${booksInfo}">
+            <td th:text="${book.title}"/>
+            <td th:text="${book.authorName}"/>
+            <td th:text="${book.genre}"/>
+            <td th:text="${book.publishedDate == null ? 'no info' : book.publishedDate}"/>
+        </tr>
+    </table>
+</body>
+</html>

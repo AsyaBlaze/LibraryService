@@ -1,0 +1,99 @@
+databaseChangeLog:
+  - changeSet:
+      id: 17
+      author: anastasia
+      changes:
+        - createProcedure:
+            procedureName: refresh_purchases_statistic
+            procedureBody: |
+              CREATE OR REPLACE FUNCTION refresh_purchases_statistic()
+              RETURNS TRIGGER AS $$
+              BEGIN
+                  REFRESH MATERIALIZED VIEW purchases_statistic;
+                  RETURN NEW;
+              END;
+              $$ LANGUAGE plpgsql;
+
+  - changeSet:
+      id: 18
+      author: anastasia
+      changes:
+        - sql:
+            sql: |
+              CREATE TRIGGER purchases_insert_trigger
+              AFTER INSERT ON purchases
+              FOR EACH STATEMENT
+              EXECUTE FUNCTION refresh_purchases_statistic();
+
+  - changeSet:
+      id: 19
+      author: anastasia
+      changes:
+        - createProcedure:
+            procedureName: refresh_purchases_statistic
+            procedureBody: |
+              CREATE OR REPLACE FUNCTION refresh_author_statistic()
+              RETURNS TRIGGER AS $$
+              BEGIN
+                  REFRESH MATERIALIZED VIEW author_statistic;
+                  RETURN NEW;
+              END;
+              $$ LANGUAGE plpgsql;
+
+  - changeSet:
+      id: 20
+      author: anastasia
+      changes:
+        - sql:
+            sql: |
+              CREATE TRIGGER books_insert_trigger_author
+              AFTER INSERT ON books
+              FOR EACH STATEMENT
+              EXECUTE FUNCTION refresh_author_statistic();
+
+  - changeSet:
+      id: 21
+      author: anastasia
+      changes:
+        - sql:
+            sql: |
+              CREATE TRIGGER reviews_insert_trigger_author
+              AFTER INSERT ON reviews
+              FOR EACH STATEMENT
+              EXECUTE FUNCTION refresh_author_statistic();
+  - changeSet:
+      id: 22
+      author: anastasia
+      changes:
+        - createProcedure:
+            procedureName: refresh_purchases_statistic
+            procedureBody: |
+              CREATE OR REPLACE FUNCTION refresh_genres_statistic()
+              RETURNS TRIGGER AS $$
+              BEGIN
+                  REFRESH MATERIALIZED VIEW genres_statistic;
+                  RETURN NEW;
+              END;
+              $$ LANGUAGE plpgsql;
+
+  - changeSet:
+      id: 23
+      author: anastasia
+      changes:
+        - sql:
+            sql: |
+              CREATE TRIGGER books_insert_trigger_genres
+              AFTER INSERT ON books
+              FOR EACH STATEMENT
+              EXECUTE FUNCTION refresh_genres_statistic();
+
+  - changeSet:
+      id: 24
+      author: anastasia
+      changes:
+        - sql:
+            sql: |
+              CREATE TRIGGER reviews_insert_trigger_genres
+              AFTER INSERT ON reviews
+              FOR EACH STATEMENT
+              EXECUTE FUNCTION refresh_genres_statistic();

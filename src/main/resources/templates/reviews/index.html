@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews</title>
+</head>
+<body>
+    <nav>
+        <a style="margin: 10px" href="http://localhost:8060/library/book">Catalog</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/info">All books info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/reviews_info">Book reviews info</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=author">Authors statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=genre">Genre statistics</a>
+        <a style="margin: 10px" href="http://localhost:8060/library/book/statistic?by=purchase">Profit statistics</a>
+        <br/><br/><br/>
+    </nav>
+
+    <b>Reviews</b>
+    <br>
+    <hr>
+    <div th:each="review : ${reviews}">
+        <div>
+            <b th:text="'Rating: ' + ${review.getRating()}"></b>
+            <br/>
+            <p th:text="${review.getReviewText()}"></p>
+            <i th:text="'By ' + ${review.getReviewerName()}"></i>
+            <i th:text="${review.getReviewDate()}"></i>
+            <hr/><br/>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <div>
+        <form th:method="GET" th:action="@{/library/book/{id}/add_review (id=${booId})}">
+            <input type="submit" value="Add review"/>
+        </form>
+    </div>
+</body>
+</html>
